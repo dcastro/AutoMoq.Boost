@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AutoMoq.Boost")]
+[assembly: AssemblyTitle("AutoMoq.Boost.Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Dash")]
-[assembly: AssemblyProduct("AutoMoq.Boost")]
+[assembly: AssemblyProduct("AutoMoq.Boost.Test")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("81be87c1-dece-4db3-a2bf-f403071eb96a")]
+[assembly: Guid("7ee8c37b-abe4-473b-aa32-ef12642962e7")]
 
 // Version information for an assembly consists of the following four values:
 //

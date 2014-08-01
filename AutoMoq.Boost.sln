@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMoq.Boost", "src\AutoMoq.Boost\AutoMoq.Boost.csproj", "{D1EF97C4-C0F0-492E-8DCB-D15ACD75DAC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMoq.Boost.Test", "test\AutoMoq.Boost.Test\AutoMoq.Boost.Test.csproj", "{8C2D14EE-A0DA-46E5-B6BD-008E1EEEB199}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{D1EF97C4-C0F0-492E-8DCB-D15ACD75DAC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1EF97C4-C0F0-492E-8DCB-D15ACD75DAC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1EF97C4-C0F0-492E-8DCB-D15ACD75DAC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C2D14EE-A0DA-46E5-B6BD-008E1EEEB199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C2D14EE-A0DA-46E5-B6BD-008E1EEEB199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C2D14EE-A0DA-46E5-B6BD-008E1EEEB199}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C2D14EE-A0DA-46E5-B6BD-008E1EEEB199}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
