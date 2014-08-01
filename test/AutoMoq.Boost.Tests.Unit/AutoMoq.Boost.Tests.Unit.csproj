@@ -6,8 +6,8 @@
     <ProjectGuid>{8C2D14EE-A0DA-46E5-B6BD-008E1EEEB199}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dash.AutoMoq.Boost.Test</RootNamespace>
-    <AssemblyName>Dash.AutoMoq.Boost.Test</AssemblyName>
+    <RootNamespace>Dash.AutoMoq.Boost.Tests.Unit</RootNamespace>
+    <AssemblyName>Dash.AutoMoq.Boost.Tests.Unit</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,7 +50,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
