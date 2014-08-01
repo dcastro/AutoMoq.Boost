@@ -21,7 +21,7 @@ namespace Dash.AutoMoq.Boost.Extensions
         /// Sets up a method with a given member access expression, and returns an instance of <see cref="ISetup{TMock}"/>
         /// </summary>
         /// <param name="mock">The mock being set up.</param>
-        /// <param name="memberType">The type of the member being set up.</param>
+        /// <param name="memberType">The return type of the member being set up.</param>
         /// <param name="memberAccessExpression">The expression needed to setup the member.</param>
         /// <returns>The result of setting up <paramref name="mock"/> with <paramref name="memberAccessExpression"/>.</returns>
         public static object Setup(this Mock mock, Type memberType, Expression memberAccessExpression)
@@ -29,7 +29,7 @@ namespace Dash.AutoMoq.Boost.Extensions
             var setupMethod = mock.GetType()
                                   .GetMethods()
                                   .First(method => method.Name == "Setup" &&
-                                                   method.ContainsGenericParameters &&
+                                                   method.IsGenericMethod &&
                                                    method.GetGenericArguments().Count() == 1)
                                   .MakeGenericMethod(memberType);
 
@@ -42,7 +42,7 @@ namespace Dash.AutoMoq.Boost.Extensions
         /// <param name="setup">An instance of <see cref="ISetup{TMock,TResult}"/>.</param>
         /// <param name="fixture">The fixture that will be used to retrieve the return value for the mock's member being setup.</param>
         /// <param name="mockedType">The type of the object being mocked.</param>
-        /// <param name="memberType">The type of the member of being setup.</param>
+        /// <param name="memberType">The return type of the member of being setup.</param>
         /// <returns></returns>
         public static object ReturnsFromFixture(this object setup, IFixture fixture, Type mockedType, Type memberType)
         {

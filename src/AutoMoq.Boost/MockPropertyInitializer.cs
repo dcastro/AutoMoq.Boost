@@ -51,7 +51,8 @@ namespace Dash.AutoMoq.Boost
         }
 
         /// <summary>
-        /// Returns a lambda expression thats represents an access to a mocked type's property (e.g., x => x.Prop)
+        /// Returns a lambda expression thats represents an access to a mocked type's property.
+        /// E.g., <![CDATA[ x => x.Prop ]]>
         /// </summary>
         private Expression MakePropertyAccessLambda(Type mockedType, PropertyInfo property)
         {

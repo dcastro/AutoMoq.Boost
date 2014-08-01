@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\MockExtensions.cs" />
+    <Compile Include="MockMethodInitializer.cs" />
     <Compile Include="IMockInitializer.cs" />
     <Compile Include="MockPropertyInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -59,6 +60,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy /Q /Y /E "$(TargetDir)*.*" "$(SolutionDir)bin\"</PostBuildEvent>
