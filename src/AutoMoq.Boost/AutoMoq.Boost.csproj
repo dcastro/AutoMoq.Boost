@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMoqBoostCustomization.cs" />
     <Compile Include="MockEx.cs" />
     <Compile Include="MockMethodInitializer.cs" />
     <Compile Include="IMockInitializer.cs" />

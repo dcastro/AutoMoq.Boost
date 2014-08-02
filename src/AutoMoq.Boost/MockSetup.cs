@@ -38,6 +38,14 @@ namespace Dash.AutoMoq.Boost
         }
 
         /// <summary>
+        /// Gets the mock initializers that will be used to setup a mock.
+        /// </summary>
+        public IEnumerable<IMockInitializer> Initializers
+        {
+            get { return _initializers; }
+        } 
+
+        /// <summary>
         /// Runs a set of initializers to setup a <see cref="Mock{T}"/> instance.
         /// </summary>
         /// <param name="request">The request that describes what to create.</param>
