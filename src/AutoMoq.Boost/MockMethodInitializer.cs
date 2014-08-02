@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using Dash.AutoMoq.Boost.Extensions;
 using Moq;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
@@ -49,7 +48,7 @@ namespace Dash.AutoMoq.Boost
                 var setup = mock.Setup(returnType, methodInvocationLambda);
 
                 //call `Returns`
-                setup.ReturnsFromFixture(_fixture, mockedType, returnType);
+                setup.ReturnsUsingFixture(_fixture, mockedType, returnType);
             }
         }
 

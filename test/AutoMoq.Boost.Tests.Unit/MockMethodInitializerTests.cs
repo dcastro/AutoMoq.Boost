@@ -19,14 +19,14 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
                                                                   [Frozen] Fixture fixture,
                                                                   Mock<IInterfaceWithMethod> mock)
         {
-            fixture.Freeze("a string");
+            var stringFromFixture = fixture.Freeze<string>();
 
             //act
             initializer.Setup(mock);
             var result = mock.Object.SomeMethod();
 
             //assert
-            Assert.Contains("a string", result);
+            Assert.Equal(stringFromFixture, result);
         }
 
         [Theory, AutoData]
@@ -39,7 +39,7 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
         public void IgnoresGenericMethods(MockMethodInitializer initializer, [Frozen] Fixture fixture,
                                           Mock<IInterfaceWithGenericMethod> mock)
         {
-            fixture.Freeze("a string");
+            fixture.Freeze<string>();
             mock.DefaultValue = DefaultValue.Empty;
 
             //assert that a string was not retrieved from the fixture

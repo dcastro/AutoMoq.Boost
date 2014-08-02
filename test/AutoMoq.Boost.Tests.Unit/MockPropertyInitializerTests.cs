@@ -18,14 +18,14 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
                                                                      [Frozen] Fixture fixture,
                                                                      Mock<IInterfaceWithProperty> mock)
         {
-            fixture.Freeze("a string");
+            var stringFromFixture = fixture.Freeze<string>();
 
             //act
             initializer.Setup(mock);
             var result = mock.Object.SomeProperty;
 
             //assert
-            Assert.Contains("a string", result);
+            Assert.Equal(stringFromFixture, result);
         }
 
         [Theory, AutoData]

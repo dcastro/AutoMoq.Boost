@@ -51,7 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\MockExtensions.cs" />
+    <Compile Include="MockEx.cs" />
     <Compile Include="MockMethodInitializer.cs" />
     <Compile Include="IMockInitializer.cs" />
     <Compile Include="MockPropertyInitializer.cs" />

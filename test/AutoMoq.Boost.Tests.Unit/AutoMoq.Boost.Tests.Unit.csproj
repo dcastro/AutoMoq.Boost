@@ -73,6 +73,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="MockExTests.cs" />
     <Compile Include="MockMethodInitializerTests.cs" />
     <Compile Include="MockPropertyInitializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

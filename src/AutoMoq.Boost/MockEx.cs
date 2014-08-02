@@ -5,14 +5,33 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Moq;
+using Moq.Language;
 using Moq.Language.Flow;
 using Ploeh.AutoFixture;
 
-namespace Dash.AutoMoq.Boost.Extensions
+namespace Dash.AutoMoq.Boost
 {
-    internal static class MockExtensions
+    /// <summary>
+    /// Mock extensions.
+    /// </summary>
+    public static class MockEx
     {
-        public static Type GetMockedType(this Mock mock)
+        /// <summary>
+        /// Sets up a member to retrieve the return value from a fixture.
+        /// </summary>
+        /// <typeparam name="TMock">The type of the object being mocked.</typeparam>
+        /// <typeparam name="TResult">The return type of the object's member being mocked.</typeparam>
+        /// <param name="setup">The member setup.</param>
+        /// <param name="fixture">The fixture from which the return value will be retrieved.</param>
+        /// <returns></returns>
+        public static IReturnsResult<TMock> ReturnsUsingFixture<TMock, TResult>(this IReturns<TMock, TResult> setup,
+                                                                                IFixture fixture)
+            where TMock : class
+        {
+            return setup.Returns(fixture.Create<TResult>());
+        }
+
+        internal static Type GetMockedType(this Mock mock)
         {
             return mock.GetType().GetGenericArguments().Single();
         }
@@ -24,7 +43,7 @@ namespace Dash.AutoMoq.Boost.Extensions
         /// <param name="memberType">The return type of the member being set up.</param>
         /// <param name="memberAccessExpression">The expression needed to setup the member.</param>
         /// <returns>The result of setting up <paramref name="mock"/> with <paramref name="memberAccessExpression"/>.</returns>
-        public static object Setup(this Mock mock, Type memberType, Expression memberAccessExpression)
+        internal static object Setup(this Mock mock, Type memberType, Expression memberAccessExpression)
         {
             var setupMethod = mock.GetType()
                                   .GetMethods()
@@ -44,20 +63,14 @@ namespace Dash.AutoMoq.Boost.Extensions
         /// <param name="mockedType">The type of the object being mocked.</param>
         /// <param name="memberType">The return type of the member of being setup.</param>
         /// <returns></returns>
-        public static object ReturnsFromFixture(this object setup, IFixture fixture, Type mockedType, Type memberType)
+        internal static object ReturnsUsingFixture(this object setup, IFixture fixture, Type mockedType, Type memberType)
         {
-            var returns = typeof (MockExtensions).GetMethod("ReturnsFromFixtureAux",
-                                                            BindingFlags.Static | BindingFlags.NonPublic)
-                                                 .MakeGenericMethod(new[] {mockedType, memberType});
+            var returns = typeof (MockEx).GetMethods()
+                                         .Where(method => method.Name == "ReturnsUsingFixture")
+                                         .Single(method => method.IsGenericMethod)
+                                         .MakeGenericMethod(new[] {mockedType, memberType});
 
             return returns.Invoke(null, new[] {setup, fixture});
-        }
-
-        private static IReturnsResult<TMock> ReturnsFromFixtureAux<TMock, TResult>(this ISetup<TMock, TResult> setup,
-                                                                                   IFixture fixture)
-            where TMock : class
-        {
-            return setup.Returns(fixture.Create<TResult>());
         }
     }
 }
