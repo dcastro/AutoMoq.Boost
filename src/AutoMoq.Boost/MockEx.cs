@@ -28,7 +28,12 @@ namespace Dash.AutoMoq.Boost
                                                                                 IFixture fixture)
             where TMock : class
         {
-            return setup.Returns(fixture.Create<TResult>());
+            return setup.Returns(() =>
+                {
+                    var result = fixture.Create<TResult>();
+                    setup.Returns(result);
+                    return result;
+                });
         }
 
         internal static Type GetMockedType(this Mock mock)
