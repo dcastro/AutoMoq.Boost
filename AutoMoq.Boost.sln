@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMoq.Boost.Tests.Unit", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMoq.Boost.Tests.Functional", "test\AutoMoq.Boost.Tests.Functional\AutoMoq.Boost.Tests.Functional.csproj", "{0A9D4CB1-E181-41F3-81F4-29256A9E1595}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoMoq.Boost.xUnit", "src\AutoMoq.Boost.xUnit\AutoMoq.Boost.xUnit.csproj", "{9E15CB67-20E9-4B9E-A8AD-706D9788009A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{0A9D4CB1-E181-41F3-81F4-29256A9E1595}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A9D4CB1-E181-41F3-81F4-29256A9E1595}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A9D4CB1-E181-41F3-81F4-29256A9E1595}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E15CB67-20E9-4B9E-A8AD-706D9788009A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E15CB67-20E9-4B9E-A8AD-706D9788009A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E15CB67-20E9-4B9E-A8AD-706D9788009A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E15CB67-20E9-4B9E-A8AD-706D9788009A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
