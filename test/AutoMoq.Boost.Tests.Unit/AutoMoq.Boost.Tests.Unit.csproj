@@ -73,9 +73,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AutoMoqDataAttribute.cs" />
     <Compile Include="MockExTests.cs" />
     <Compile Include="MockMethodInitializerTests.cs" />
     <Compile Include="MockPropertyInitializerTests.cs" />
+    <Compile Include="MockSetupTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
