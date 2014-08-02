@@ -95,9 +95,12 @@ public void Test([Frozen] Mock<IDbCommand> cmd, PersonRepo repo)
     Assert.Equal(3, repo.Count());
 }
 ```
-
 [Easy as pie][5].
 
+
+## NUnit and xUnit integration
+
+In order to have your data injected into a test method, instead of having to retrieve them from a fixture, you can use the `AutoMoqBoostData` attribute found in either AutoMoq.Boost.NUnit or AutoMoq.Boost.xUnit.
 
 ## Limitations
 
