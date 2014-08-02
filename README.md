@@ -5,6 +5,14 @@ AutoMoq.Boost is an extension of [AutoMoq][1] for [AutoFixture][2].
 AutoMoq.Boost sets up mocks created by AutoMoq and instructs them to retrieve their dependencies from the fixture (i.e., the mocking container).
 This makes it really easy to setup large complex dependency trees.
 
+## Table of Contents
+
+- [AutoMoq.Boost](#user-content-automoqboost)
+	- [The problem](#user-content-the-problem)
+	- [The solution](#user-content-the-solution)
+	- [NUnit and xUnit integration](#user-content-nunit-and-xunit-integration)
+	- [Limitations](#user-content-limitations)
+
 ## The problem
 
 AutoMoq lets you use AutoFixture as a mocking container. It uses [Moq][3] to resolve dependencies of abstract types (i.e., interfaces and abstract classes) by creating `Mock<T>` instances. This allows for very concise, readable and easy to maintain unit tests. Take a look at the following example using [Mark Seemann's `AutoMoqDataAttribute`][4].
