@@ -53,8 +53,8 @@
   <ItemGroup>
     <Compile Include="AutoMoqBoostCustomization.cs" />
     <Compile Include="MockEx.cs" />
-    <Compile Include="MockMethodInitializer.cs" />
-    <Compile Include="IMockInitializer.cs" />
+    <Compile Include="Initializers\MockMethodInitializer.cs" />
+    <Compile Include="Initializers\IMockInitializer.cs" />
     <Compile Include="MockSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
