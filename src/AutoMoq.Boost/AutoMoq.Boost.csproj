@@ -55,7 +55,6 @@
     <Compile Include="MockEx.cs" />
     <Compile Include="MockMethodInitializer.cs" />
     <Compile Include="IMockInitializer.cs" />
-    <Compile Include="MockPropertyInitializer.cs" />
     <Compile Include="MockSetup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
