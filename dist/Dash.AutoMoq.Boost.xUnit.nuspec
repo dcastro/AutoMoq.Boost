@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>AutoMoq.Boost.xUnit</id>
+        <version>1.0.0</version>
+        <title>AutoMoq.Boost with xUnit</title>
+        <authors>DCastro</authors>
+        <owners>DCastro</owners>
+        <projectUrl>https://github.com/dcastro/AutoMoq.Boost</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>This extension provides a AutoMoqBoostData attribute that, when applied to xUnit's data theories, lets you parameterize your unit tests while leveraging AutoFixture, AutoMoq and the Boost extension.
+
+See the project's page for examples: https://github.com/dcastro/AutoMoq</description>
+        <summary>Extension for AutoMoq.Boost that integrates it with xUnit.</summary>
+        <copyright>© 2014 Diogo Castro</copyright>
+        <tags>autofixture automoq moq mocking xunit</tags>
+        <dependencies>
+            <dependency id="AutoFixture.Xunit" version="3.19.1" />
+            <dependency id="AutoMoq.Boost" version="1.0.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\bin\Dash.AutoMoq.Boost.xUnit.dll" target="lib\net40\Dash.AutoMoq.Boost.xUnit.dll" />
+    </files>
+</package>
