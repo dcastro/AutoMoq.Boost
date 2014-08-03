@@ -67,8 +67,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="CircularDependenciesAreAllowed.cs" />
-    <Compile Include="MocksGetTheirDependenciesFromFixture.cs" />
+    <Compile Include="InterfaceMembersReturnValueFromFixture.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SealedMethodsAreIgnored.cs" />
+    <Compile Include="SealedSettablePropertiesAreSetUsingFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\AutoMoq.Boost.xUnit\AutoMoq.Boost.xUnit.csproj">
