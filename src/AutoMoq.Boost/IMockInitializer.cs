@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Moq;
+using Ploeh.AutoFixture.Kernel;
 
 namespace Dash.AutoMoq.Boost
 {
@@ -15,6 +16,7 @@ namespace Dash.AutoMoq.Boost
         /// Initializes or sets up a mock.
         /// </summary>
         /// <param name="mock">The mock to initialize/setup.</param>
-        void Setup(Mock mock);
+        /// <param name="context">The context of the mock.</param>
+        void Setup(Mock mock, ISpecimenContext context);
     }
 }

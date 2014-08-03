@@ -16,23 +16,13 @@ namespace Dash.AutoMoq.Boost
     /// </summary>
     public class MockMethodInitializer : IMockInitializer
     {
-        private readonly IFixture _fixture;
-
-        /// <summary>
-        /// Creates an instance of <see cref="MockMethodInitializer"/>.
-        /// </summary>
-        /// <param name="fixture">The fixture that will be used to retrieve the return values for an object's methods.</param>
-        public MockMethodInitializer(IFixture fixture)
-        {
-            _fixture = fixture;
-        }
-
         /// <summary>
         /// Sets up a mocked object's methods so that the return values will be retrieved from a fixture,
         /// instead of being created directly by Moq.
         /// </summary>
         /// <param name="mock">The mock to setup.</param>
-        public void Setup(Mock mock)
+        /// <param name="context">The context of the mock.</param>
+        public void Setup(Mock mock, ISpecimenContext context)
         {
             var mockedType = mock.GetMockedType();
             var methods = mockedType.GetMethods()
@@ -48,7 +38,7 @@ namespace Dash.AutoMoq.Boost
                 var setup = mock.Setup(returnType, methodInvocationLambda);
 
                 //call `Returns`
-                setup.ReturnsUsingFixture(_fixture, mockedType, returnType);
+                setup.ReturnsUsingContext(context, mockedType, returnType);
             }
         }
 

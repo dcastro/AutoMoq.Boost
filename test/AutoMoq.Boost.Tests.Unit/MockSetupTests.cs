@@ -27,7 +27,7 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
 
             //assert
             foreach (var initializer in inits)
-                Mock.Get(initializer).Verify(i => i.Setup(mock), Times.Once());
+                Mock.Get(initializer).Verify(i => i.Setup(mock, context), Times.Once());
         }
 
         [Theory, AutoMoqData]
@@ -45,7 +45,7 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
 
             //assert
             foreach (var initializer in inits)
-                Mock.Get(initializer).Verify(i => i.Setup(It.IsAny<Mock>()), Times.Never());
+                Mock.Get(initializer).Verify(i => i.Setup(It.IsAny<Mock>(), null), Times.Never());
         }
     }
 }

@@ -8,6 +8,7 @@ using Moq;
 using Moq.Language;
 using Moq.Language.Flow;
 using Ploeh.AutoFixture;
+using Ploeh.AutoFixture.Kernel;
 
 namespace Dash.AutoMoq.Boost
 {
@@ -28,12 +29,7 @@ namespace Dash.AutoMoq.Boost
                                                                                 IFixture fixture)
             where TMock : class
         {
-            return setup.Returns(() =>
-                {
-                    var result = fixture.Create<TResult>();
-                    setup.Returns(result);
-                    return result;
-                });
+            return setup.ReturnsUsingContext(new SpecimenContext(fixture));
         }
 
         internal static Type GetMockedType(this Mock mock)
@@ -61,21 +57,33 @@ namespace Dash.AutoMoq.Boost
         }
 
         /// <summary>
-        /// Configures an instance of <see cref="ISetup{TMock,TResult}"/> to retrieve the return value from <paramref name="fixture"/>.
+        /// Configures an instance of <see cref="ISetup{TMock,TResult}"/> to retrieve the return value from <paramref name="context"/>.
         /// </summary>
         /// <param name="setup">An instance of <see cref="ISetup{TMock,TResult}"/>.</param>
-        /// <param name="fixture">The fixture that will be used to retrieve the return value for the mock's member being setup.</param>
+        /// <param name="context">The context (fixture) that will be used to retrieve the return value for the mock's member being setup.</param>
         /// <param name="mockedType">The type of the object being mocked.</param>
         /// <param name="memberType">The return type of the member of being setup.</param>
         /// <returns></returns>
-        internal static object ReturnsUsingFixture(this object setup, IFixture fixture, Type mockedType, Type memberType)
+        internal static object ReturnsUsingContext(this object setup, ISpecimenContext context, Type mockedType, Type memberType)
         {
-            var returns = typeof (MockEx).GetMethods()
-                                         .Where(method => method.Name == "ReturnsUsingFixture")
+            var returns = typeof (MockEx).GetMethods(BindingFlags.Static | BindingFlags.NonPublic)
+                                         .Where(method => method.Name == "ReturnsUsingContext")
                                          .Single(method => method.IsGenericMethod)
                                          .MakeGenericMethod(new[] {mockedType, memberType});
 
-            return returns.Invoke(null, new[] {setup, fixture});
+            return returns.Invoke(null, new[] {setup, context});
+        }
+
+        internal static IReturnsResult<TMock> ReturnsUsingContext<TMock, TResult>(this IReturns<TMock, TResult> setup,
+                                                                                ISpecimenContext context)
+            where TMock : class
+        {
+            return setup.Returns(() =>
+                {
+                    var result = (TResult) context.Resolve(typeof (TResult));
+                    setup.Returns(result);
+                    return result;
+                });
         }
     }
 }

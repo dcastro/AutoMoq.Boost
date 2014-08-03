@@ -63,7 +63,7 @@ namespace Dash.AutoMoq.Boost
             var mock = specimen as Mock;
 
             foreach (var mockInitializer in _initializers)
-                mockInitializer.Setup(mock);
+                mockInitializer.Setup(mock, context);
 
             return mock;
         }

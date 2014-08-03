@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Moq;
 using Ploeh.AutoFixture;
+using Ploeh.AutoFixture.Kernel;
 using Ploeh.AutoFixture.Xunit;
 using Xunit;
 using Xunit.Extensions;
@@ -15,14 +16,14 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
     public class MockMethodInitializerTests
     {
         [Theory, AutoData]
-        public void SetsUpMethodsToRetrieveReturnValueFromFixture(MockMethodInitializer initializer,
+        public void SetsUpMethodsToRetrieveReturnValueFromContext(MockMethodInitializer initializer,
                                                                   [Frozen] Fixture fixture,
                                                                   Mock<IInterfaceWithMethod> mock)
         {
             var stringFromFixture = fixture.Freeze<string>();
 
             //act
-            initializer.Setup(mock);
+            initializer.Setup(mock, new SpecimenContext(fixture));
             var result = mock.Object.SomeMethod();
 
             //assert
@@ -30,9 +31,9 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
         }
 
         [Theory, AutoData]
-        public void IgnoresVoidMethods(MockMethodInitializer initializer, Mock<IInterfaceWithVoidMethod> mock)
+        public void IgnoresVoidMethods(Fixture fixture, MockMethodInitializer initializer, Mock<IInterfaceWithVoidMethod> mock)
         {
-            Assert.DoesNotThrow(() => initializer.Setup(mock));
+            Assert.DoesNotThrow(() => initializer.Setup(mock, new SpecimenContext(fixture)));
         }
 
         [Theory, AutoData]
@@ -43,7 +44,7 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
             mock.DefaultValue = DefaultValue.Empty;
 
             //assert that a string was not retrieved from the fixture
-            Assert.DoesNotThrow(() => initializer.Setup(mock));
+            Assert.DoesNotThrow(() => initializer.Setup(mock, new SpecimenContext(fixture)));
             Assert.Null(mock.Object.GenericMethod<string>());
         }
 

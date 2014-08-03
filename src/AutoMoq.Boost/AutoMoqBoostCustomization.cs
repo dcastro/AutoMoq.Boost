@@ -57,7 +57,7 @@ namespace Dash.AutoMoq.Boost
                     new MockPostprocessor(
                         new MethodInvoker(
                             new MockConstructorQuery())),
-                    new MockMethodInitializer(fixture)));
+                    new MockMethodInitializer()));
 
             fixture.ResidueCollectors.Add(Relay);
         }
