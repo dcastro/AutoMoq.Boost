@@ -31,13 +31,27 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
 
         [Theory, AutoData]
         public void SetsUp_VirtualMethods_ToRetrieveReturnValueFromContext(Fixture fixture,
-                                                                            [Frozen] string frozenString,
-                                                                            VirtualMethodInitializer initializer,
-                                                                            Mock<ClassWithVirtualMethod> mock)
+                                                                           [Frozen] string frozenString,
+                                                                           VirtualMethodInitializer initializer,
+                                                                           Mock<ClassWithVirtualMethod> mock)
         {
             //act
             initializer.Setup(mock, new SpecimenContext(fixture));
             var result = mock.Object.VirtualMethod();
+
+            //assert
+            Assert.Equal(frozenString, result);
+        }
+
+        [Theory, AutoData]
+        public void SetsUp_PropertyGetters_ToRetrieveReturnValueFromContext(Fixture fixture,
+                                                                            [Frozen] string frozenString,
+                                                                            VirtualMethodInitializer initializer,
+                                                                            Mock<IInterfaceWithProperty> mock)
+        {
+            //act
+            initializer.Setup(mock, new SpecimenContext(fixture));
+            var result = mock.Object.SomeProperty;
 
             //assert
             Assert.Equal(frozenString, result);
@@ -77,9 +91,15 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
             string SomeMethod();
         }
 
+        public interface IInterfaceWithProperty
+        {
+            string SomeProperty { get; set; }
+        }
+
         public interface IInterfaceWithVoidMethod
         {
             void VoidMethod();
+            string SetOnlyProperty { set; }
         }
 
         public interface IInterfaceWithGenericMethod

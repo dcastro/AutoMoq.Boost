@@ -15,7 +15,9 @@ namespace Dash.AutoMoq.Boost
     /// instead of being created directly by Moq.
     /// 
     /// This will setup any virtual methods.
-    /// This includes interface's methods and class's abstract/virtual/overridden/non-sealed methods.
+    /// This includes:
+    ///  - interface's methods/property getters;
+    ///  - class's abstract/virtual/overridden/non-sealed methods/property getters.
     /// </summary>
     public class VirtualMethodInitializer : IMockInitializer
     {
