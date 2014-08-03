@@ -27,7 +27,7 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
             boost.Customize(fixture);
 
             var mockSetup = (MockSetup) fixture.Customizations.Single(builder => builder is MockSetup);
-            Assert.True(mockSetup.Initializers.Any(init => init is MockMethodInitializer));
+            Assert.True(mockSetup.Initializers.Any(init => init is VirtualMethodInitializer));
         }
 
         [Theory, AutoMoqData]

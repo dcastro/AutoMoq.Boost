@@ -13,12 +13,12 @@ using Xunit.Extensions;
 
 namespace Dash.AutoMoq.Boost.Tests.Unit
 {
-    public class MockMethodInitializerTests
+    public class VirtualMethodInitializerTests
     {
         [Theory, AutoData]
         public void SetsUp_InterfaceMethods_ToRetrieveReturnValueFromContext(Fixture fixture,
                                                                              [Frozen] string frozenString,
-                                                                             MockMethodInitializer initializer,
+                                                                             VirtualMethodInitializer initializer,
                                                                              Mock<IInterfaceWithMethod> mock)
         {
             //act
@@ -30,38 +30,38 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
         }
 
         [Theory, AutoData]
-        public void SetsUp_AbstractMethods_ToRetrieveReturnValueFromContext(Fixture fixture,
+        public void SetsUp_VirtualMethods_ToRetrieveReturnValueFromContext(Fixture fixture,
                                                                             [Frozen] string frozenString,
-                                                                            MockMethodInitializer initializer,
-                                                                            Mock<ClassWithAbstractMethod> mock)
+                                                                            VirtualMethodInitializer initializer,
+                                                                            Mock<ClassWithVirtualMethod> mock)
         {
             //act
             initializer.Setup(mock, new SpecimenContext(fixture));
-            var result = mock.Object.AbstractMethod();
+            var result = mock.Object.VirtualMethod();
 
             //assert
             Assert.Equal(frozenString, result);
         }
 
         [Theory, AutoData]
-        public void IgnoresSealedMethods(Fixture fixture, MockMethodInitializer initializer,
+        public void IgnoresSealedMethods(Fixture fixture, VirtualMethodInitializer initializer,
                                          Mock<ClassWithSealedMethod> mock)
         {
             Assert.DoesNotThrow(() => initializer.Setup(mock, new SpecimenContext(fixture)));
 
-            var result = mock.Object.AbstractMethod();
+            var result = mock.Object.VirtualMethod();
             Assert.Equal("Awesome string", result);
         }
 
         [Theory, AutoData]
-        public void IgnoresVoidMethods(Fixture fixture, MockMethodInitializer initializer,
+        public void IgnoresVoidMethods(Fixture fixture, VirtualMethodInitializer initializer,
                                        Mock<IInterfaceWithVoidMethod> mock)
         {
             Assert.DoesNotThrow(() => initializer.Setup(mock, new SpecimenContext(fixture)));
         }
 
         [Theory, AutoData]
-        public void IgnoresGenericMethods(Fixture fixture, MockMethodInitializer initializer,
+        public void IgnoresGenericMethods(Fixture fixture, VirtualMethodInitializer initializer,
                                           Mock<IInterfaceWithGenericMethod> mock)
         {
             fixture.Freeze<string>();
@@ -87,17 +87,17 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
             string GenericMethod<T>();
         }
 
-        public class ClassWithAbstractMethod
+        public class ClassWithVirtualMethod
         {
-            public virtual string AbstractMethod()
+            public virtual string VirtualMethod()
             {
                 throw new NotImplementedException();
             }
         }
 
-        public class ClassWithSealedMethod : ClassWithAbstractMethod
+        public class ClassWithSealedMethod : ClassWithVirtualMethod
         {
-            public override sealed string AbstractMethod()
+            public override sealed string VirtualMethod()
             {
                 return "Awesome string";
             }

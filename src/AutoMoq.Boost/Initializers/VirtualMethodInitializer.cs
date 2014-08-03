@@ -13,8 +13,11 @@ namespace Dash.AutoMoq.Boost
     /// <summary>
     /// Sets up a mocked object's methods so that the return values will be retrieved from a fixture,
     /// instead of being created directly by Moq.
+    /// 
+    /// This will setup any virtual methods.
+    /// This includes interface's methods and class's abstract/virtual/overridden/non-sealed methods.
     /// </summary>
-    public class MockMethodInitializer : IMockInitializer
+    public class VirtualMethodInitializer : IMockInitializer
     {
         /// <summary>
         /// Sets up a mocked object's methods so that the return values will be retrieved from a fixture,
