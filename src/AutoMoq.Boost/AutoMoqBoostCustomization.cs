@@ -31,12 +31,12 @@ namespace Dash.AutoMoq.Boost
         /// <param name="relay">A mock relay to be added to <see cref="IFixture.ResidueCollectors"/></param>
         public AutoMoqBoostCustomization(ISpecimenBuilder relay)
         {
-            if(relay == null)
+            if (relay == null)
                 throw new ArgumentNullException("relay");
 
             _relay = relay;
         }
-        
+
         /// <summary>
         /// Gets the relay that will be added to <see cref="IFixture.ResidueCollectors"/> when <see cref="Customize"/> is invoked.
         /// </summary>
@@ -57,7 +57,8 @@ namespace Dash.AutoMoq.Boost
                     new MockPostprocessor(
                         new MethodInvoker(
                             new MockConstructorQuery())),
-                    new VirtualMethodInitializer()));
+                    new VirtualMethodInitializer(),
+                    new SealedPropertyInitializer()));
 
             fixture.ResidueCollectors.Add(Relay);
         }
