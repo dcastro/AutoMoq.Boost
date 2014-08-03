@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="AutoMoqBoostCustomizationTests.cs" />
     <Compile Include="AutoMoqDataAttribute.cs" />
+    <Compile Include="Initializers\SealedPropertyInitializerTests.cs" />
     <Compile Include="MockExTests.cs" />
     <Compile Include="Initializers\VirtualMethodInitializerTests.cs" />
     <Compile Include="MockSetupTests.cs" />
