@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMoqBoostCustomization.cs" />
+    <Compile Include="Extensions\MethodBaseExtensions.cs" />
     <Compile Include="MockEx.cs" />
     <Compile Include="Initializers\VirtualMethodInitializer.cs" />
     <Compile Include="Initializers\IMockInitializer.cs" />

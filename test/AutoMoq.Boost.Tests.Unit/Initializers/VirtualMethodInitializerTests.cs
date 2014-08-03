@@ -63,8 +63,8 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
         {
             Assert.DoesNotThrow(() => initializer.Setup(mock, new SpecimenContext(fixture)));
 
-            var result = mock.Object.VirtualMethod();
-            Assert.Equal("Awesome string", result);
+            Assert.Equal("Awesome string", mock.Object.SealedMethod());
+            Assert.Equal("Awesome string", mock.Object.ImplicitlySealedMethod());
         }
 
         [Theory, AutoData]
@@ -115,9 +115,19 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
             }
         }
 
-        public class ClassWithSealedMethod : ClassWithVirtualMethod
+        public abstract class TempClass
         {
-            public override sealed string VirtualMethod()
+            public abstract string SealedMethod();
+        }
+
+        public class ClassWithSealedMethod : TempClass
+        {
+            public override sealed string SealedMethod()
+            {
+                return "Awesome string";
+            }
+
+            public string ImplicitlySealedMethod()
             {
                 return "Awesome string";
             }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Dash.AutoMoq.Boost.Extensions;
 using Moq;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
@@ -32,7 +33,7 @@ namespace Dash.AutoMoq.Boost
             var mockedType = mock.GetMockedType();
             var methods = mockedType.GetMethods()
                                     .Where(method => !method.IsGenericMethod &&
-                                                     method.IsVirtual && !method.IsFinal &&
+                                                     method.IsOverridable() &&
                                                      method.ReturnType != typeof (void));
 
             foreach (var method in methods)
