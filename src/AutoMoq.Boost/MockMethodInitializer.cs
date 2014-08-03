@@ -27,6 +27,7 @@ namespace Dash.AutoMoq.Boost
             var mockedType = mock.GetMockedType();
             var methods = mockedType.GetMethods()
                                     .Where(method => !method.IsGenericMethod &&
+                                                     method.IsVirtual && !method.IsFinal &&
                                                      method.ReturnType != typeof (void));
 
             foreach (var method in methods)
