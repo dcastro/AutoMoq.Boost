@@ -95,6 +95,7 @@ public void SelectAll_ReadsDataFromDatabase([Frozen] Mock<IDataReader> readerMoc
 Specifically:
 
 - If you're mocking an interface, AutoMoq.Boost will setup all methods and properties with getters [(*)](#user-content-limitations)
+
   ```csharp
     mock.Setup(m => m.Member())
           .Returns(() => {
@@ -105,10 +106,7 @@ Specifically:
     ```
 - If you're mocking a concrete/abstract class:
     - Abstract, virtual, non-sealed methods/properties with getters will be setup in a fashion similar to the above example
-    - Sealed properties with setters will be set eagerly, like this:
-      ```csharp
-      mock.Object.Member = fixture.Create<TMember>();
-      ```
+    - Sealed properties with setters will be set eagerly, like this: `mock.Object.Member = fixture.Create<TMember>()`
 
 As you can see, the dependency resolution is done lazily to allow circular dependencies, such as:
 
