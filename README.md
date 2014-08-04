@@ -1,3 +1,10 @@
+**Table of Contents**
+
+- [AutoMoq.Boost](#user-content-automoqboost)
+	- [Behind the curtains](#user-content-behind-the-curtains)
+	- [NUnit and xUnit integration](#user-content-nunit-and-xunit-integration)
+	- [Limitations](#user-content-limitations)
+
 # AutoMoq.Boost
 
 AutoMoq.Boost is an extension of [AutoMoq][1] for [AutoFixture][2].
@@ -29,7 +36,7 @@ public void SelectAll_ReadsDataFromDatabase()
                   .Returns(commandMock.Object);
 
     //act 
-    var repo = fixture.Create<Repository<Employee>>();
+    var repo = fixture.Create<Repository<Person>>();
     var people = repo.SelectAll();
 
     //assert
@@ -51,7 +58,7 @@ public void SelectAll_ReadsDataFromDatabase()
            .Returns(new Queue<bool>(true, true, true, false).Dequeue);
 
     //act 
-    var repo = fixture.Create<Repository<Employee>>();
+    var repo = fixture.Create<Repository<Person>>();
     var people = repo.SelectAll();
 
     //assert
@@ -63,7 +70,7 @@ Better yet, using [xUnit integration](#user-content-nunit-and-xunit-integration)
 
 ```csharp
 [Theory, AutoMoqBoostData]
-public void SelectAll_ReadsDataFromDatabase([Frozen] Mock<IDataReader> readerMock, Repository<Employee> repo)
+public void SelectAll_ReadsDataFromDatabase([Frozen] Mock<IDataReader> readerMock, Repository<Person> repo)
 {
     readerMock.Setup(r => r.Read())
               .Returns(new Queue<bool>(true, true, true, false).Dequeue);
@@ -100,7 +107,7 @@ Specifically:
     mock.Object.Member = fixture.Create<TMember>()
     ```
 
-As you can see, the dependency resolution is done lazily to allow circular dependencies, such as:
+As you can see, whenever possible, the dependency resolution is done lazily to allow circular dependencies, such as:
 
 ```csharp
 public interface IPizza
