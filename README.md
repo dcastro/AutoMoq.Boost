@@ -18,9 +18,6 @@ public void SelectAll_ReadsDataFromDatabase()
     readerMock.Setup(r => r.Read())
               .Returns(new Queue<bool>(true, true, true, false).Dequeue);
 
-    readerMock.Setup(r => r["Id"])
-              .Returns(new Queue<int>(1, 2, 3).Dequeue);
-
     //setup command
     var commandMock = fixture.Freeze<Mock<IDbCommand>>();
     commandMock.Setup(cmd => cmd.ExecuteReader())
@@ -37,7 +34,6 @@ public void SelectAll_ReadsDataFromDatabase()
 
     //assert
     Assert.Equal(3, people.Count);
-    Assert.Equal(new[]{1,2,3}, people.Select(p => p.Id));
 }
 ```
 
@@ -50,12 +46,9 @@ public void SelectAll_ReadsDataFromDatabase()
     var fixture = new Fixture().Customize(new AutoMoqBoostCustomization());
 
     //setup reader
-    var readerMock = fixture.Freeze<Mock<IDataReader>>();
-    readerMock.Setup(r => r.Read())
-              .Returns(new Queue<bool>(true, true, true, false).Dequeue);
-
-    readerMock.Setup(r => r["Id"])
-              .Returns(new Queue<int>(1, 2, 3).Dequeue);
+    fixture.Freeze<Mock<IDataReader>>()
+           .Setup(r => r.Read())
+           .Returns(new Queue<bool>(true, true, true, false).Dequeue);
 
     //act 
     var repo = fixture.Create<Repository<Employee>>();
@@ -63,7 +56,6 @@ public void SelectAll_ReadsDataFromDatabase()
 
     //assert
     Assert.Equal(3, people.Count);
-    Assert.Equal(new[]{1,2,3}, people.Select(p => p.Id));
 }
 ```
 
@@ -76,15 +68,11 @@ public void SelectAll_ReadsDataFromDatabase([Frozen] Mock<IDataReader> readerMoc
     readerMock.Setup(r => r.Read())
               .Returns(new Queue<bool>(true, true, true, false).Dequeue);
 
-    readerMock.Setup(r => r["Id"])
-              .Returns(new Queue<int>(1, 2, 3).Dequeue);
-
     //act 
     var people = repo.SelectAll();
 
     //assert
-    Assert.Equal(3, people.Count);
-    Assert.Equal(new[]{1,2,3}, people.Select(p => p.Id));    
+    Assert.Equal(3, people.Count);  
 }
 ```
 
