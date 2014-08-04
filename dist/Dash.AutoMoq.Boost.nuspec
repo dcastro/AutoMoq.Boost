@@ -10,7 +10,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>This extension automatically sets up mocks retrieved from AutoFixture's AutoMoq, so that their methods/properties' return values will also be retrieved from the container. This way, you can focus on setting up the relevant bits, and let AutoFixture handle dependency resolution entirely.
 
-See the project's page for examples: https://github.com/dcastro/AutoMoq</description>
+See the project's page for examples: https://github.com/dcastro/AutoMoq.Boost</description>
         <summary>AutoMoq.Boost automatically sets up mocks retrieved from AutoFixture's AutoMoq, making mocking of complex dependency graphs easier than ever.</summary>
         <copyright>© 2014 Diogo Castro</copyright>
         <tags>autofixture automoq moq mocking</tags>

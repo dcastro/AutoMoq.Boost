@@ -10,7 +10,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>This extension provides a AutoMoqBoostData attribute that, when applied to NUnit's tests, lets you parameterize your unit tests while leveraging AutoFixture, AutoMoq and the Boost extension.
 
-See the project's page for examples: https://github.com/dcastro/AutoMoq</description>
+See the project's page for examples: https://github.com/dcastro/AutoMoq.Boost</description>
         <summary>Extension for AutoMoq.Boost that integrates it with NUnit.</summary>
         <copyright>© 2014 Diogo Castro</copyright>
         <tags>autofixture automoq moq mocking nunit</tags>
