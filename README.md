@@ -1,9 +1,9 @@
 **Table of Contents**
 
 - [AutoMoq.Boost](#user-content-automoqboost)
-	- [Behind the curtains](#user-content-behind-the-curtains)
-	- [NUnit and xUnit integration](#user-content-nunit-and-xunit-integration)
-	- [Limitations](#user-content-limitations)
+    - [Behind the curtains](#user-content-behind-the-curtains)
+    - [NUnit and xUnit integration](#user-content-nunit-and-xunit-integration)
+    - [Limitations](#user-content-limitations)
 
 # AutoMoq.Boost
 
@@ -89,18 +89,26 @@ public void SelectAll_ReadsDataFromDatabase([Frozen] Mock<IDataReader> readerMoc
 
 Specifically:
 
-- If you're mocking an interface, AutoMoq.Boost will setup all methods and properties with getters [(*)](#user-content-limitations)
+- If you're mocking an interface:
+    - AutoMoq.Boost will setup all methods, indexers and properties with getters [(*)](#user-content-limitations)
 
-  ```csharp
+    ```csharp
     mock.Setup(m => m.Method())
-          .Returns(() => {
+        .Returns(() => {
               var result = fixture.Create<TMember>();        //retrieve value from the fixture (lazily)
               mock.Setup(m => m.Method()).Returns(result);   //reuse this value the next time the member is invoked
               return result;
-          });
+        });
+    ```
+    
+    - Methods with "out" parameters will be set up like this:
+    
+    ```csharp
+    var outParameter = fixture.Create<TOut>();
+    mock.Setup(m => m.Method(out outParameter));
     ```
 - If you're mocking a concrete/abstract class:
-    - Abstract, virtual, non-sealed methods/properties with getters will be setup in a fashion similar to the above example
+    - Abstract, virtual, non-sealed methods/indexers/properties with getters will be setup in a fashion similar to the above examples;
     - Sealed properties with setters will be set eagerly, like this:
     
     ```csharp
@@ -134,10 +142,9 @@ converter.Setup(x => x.Convert<double>("10.0"))
          .ReturnsUsingFixture(fixture);
 ```
 
+Also, due to a limitation of Moq, AutoMoq.Boost cannot setup methods with "ref" parameters.
+If any such method is encountered, AutoMoq.Boost will quietly skip it.
 
-
-
-AutoMoq.Boost is also not able to mock `ref` and `out` parameters.
 
 
 (*) Note: A method belonging to a generic type isn't necessarily a "generic method". A method is only considered generic if it introduces generic type parameters of its own. For example, for the interface `IConverter<T>`, AutoMoq.Boost would be able to setup `string ConvertToString(T item)`, but not `U Convert<U>(T item)`
