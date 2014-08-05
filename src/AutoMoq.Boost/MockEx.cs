@@ -38,7 +38,7 @@ namespace Dash.AutoMoq.Boost
         }
 
         /// <summary>
-        /// Sets up a method with a given member access expression, and returns an instance of <see cref="ISetup{TMock}"/>
+        /// Sets up a non-void method with a given member access expression, and returns an instance of <see cref="ISetup{TMock, TResult}"/>
         /// </summary>
         /// <param name="mock">The mock being set up.</param>
         /// <param name="memberType">The return type of the member being set up.</param>
@@ -52,6 +52,22 @@ namespace Dash.AutoMoq.Boost
                                                    method.IsGenericMethod &&
                                                    method.GetGenericArguments().Count() == 1)
                                   .MakeGenericMethod(memberType);
+
+            return setupMethod.Invoke(mock, new object[] {memberAccessExpression});
+        }
+
+        /// <summary>
+        /// Sets up a void method with a given member access expression, and returns an instance of <see cref="ISetup{TMock}"/>
+        /// </summary>
+        /// <param name="mock">The mock being set up.</param>
+        /// <param name="memberAccessExpression">The expression needed to setup the member.</param>
+        /// <returns>The result of setting up <paramref name="mock"/> with <paramref name="memberAccessExpression"/>.</returns>
+        internal static object Setup(this Mock mock, Expression memberAccessExpression)
+        {
+            var setupMethod = mock.GetType()
+                                  .GetMethods()
+                                  .First(method => method.Name == "Setup" &&
+                                                   !method.IsGenericMethod);
 
             return setupMethod.Invoke(mock, new object[] {memberAccessExpression});
         }

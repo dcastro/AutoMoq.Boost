@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using Dash.AutoMoq.Boost.Extensions;
 using Moq;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.Kernel;
@@ -56,6 +57,42 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
             //assert
             Assert.Equal(frozenString, result);
         }
+
+        [Theory, AutoData]
+        public void SetsUp_MethodsWithParameters(Fixture fixture,
+                                                 [Frozen] string frozenString, VirtualMethodInitializer initializer,
+                                                 Mock<IInterfaceWithParameter> mock)
+        {
+            //act
+            initializer.Setup(mock, new SpecimenContext(fixture));
+            var result = mock.Object.Method(4);
+
+            //assert
+            Assert.Equal(frozenString, result);
+        }
+
+        [Theory, AutoData]
+        public void SetsUp_MethodsWithOutParameters(Fixture fixture,
+                                                    [Frozen] int frozenInt, VirtualMethodInitializer initializer,
+                                                    Mock<IInterfaceWithOutParameter> mock)
+        {
+            //act
+            initializer.Setup(mock, new SpecimenContext(fixture));
+            int outResult;
+            mock.Object.Method(out outResult);
+
+            //assert
+            Assert.Equal(frozenInt, outResult);
+        }
+
+        [Theory, AutoData]
+        public void IgnoresMethodsWithRefParameters(Fixture fixture,
+                                                    [Frozen] string frozenString, VirtualMethodInitializer initializer,
+                                                    Mock<IInterfaceWithRefParameter> mock)
+        {
+            Assert.DoesNotThrow(() => initializer.Setup(mock, new SpecimenContext(fixture)));
+        }
+
 
         [Theory, AutoData]
         public void IgnoresSealedMethods(Fixture fixture, VirtualMethodInitializer initializer,
@@ -129,6 +166,21 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
             {
                 return "Awesome string";
             }
+        }
+
+        public interface IInterfaceWithParameter
+        {
+            string Method(int i);
+        }
+
+        public interface IInterfaceWithRefParameter
+        {
+            string Method(ref string s);
+        }
+
+        public interface IInterfaceWithOutParameter
+        {
+            void Method(out int i);
         }
     }
 }

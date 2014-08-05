@@ -6,10 +6,10 @@ using System.Text;
 
 namespace Dash.AutoMoq.Boost.Extensions
 {
-    internal static class MethodBaseExtensions
+    internal static class MethodInfoExtensions
     {
 
-        public static bool IsOverridable(this MethodBase method)
+        public static bool IsOverridable(this MethodInfo method)
         {
             /*
              * From MSDN (http://goo.gl/WvOgYq)
@@ -24,9 +24,27 @@ namespace Dash.AutoMoq.Boost.Extensions
             return method.IsVirtual && !method.IsFinal;
         }
 
-        public static bool IsSealed(this MethodBase method)
+        public static bool IsSealed(this MethodInfo method)
         {
             return !method.IsOverridable();
+        }
+
+        public static bool IsVoid(this MethodInfo method)
+        {
+            return method.ReturnType == typeof (void);
+        }
+
+        public static bool HasOutParameters(this MethodInfo method)
+        {
+            return method.GetParameters()
+                         .Any(p => p.IsOut);
+        }
+
+        public static bool HasRefParameters(this MethodInfo method)
+        {
+            //"out" parameters are also considered "byref", so we have to filter these out
+            return method.GetParameters()
+                         .Any(p => p.ParameterType.IsByRef && !p.IsOut);
         }
     }
 }
