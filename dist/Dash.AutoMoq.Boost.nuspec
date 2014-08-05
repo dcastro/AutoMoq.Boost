@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>AutoMoq.Boost</id>
-        <version>1.0.0</version>
+        <version>1.1.0</version>
         <title>AutoMoq.Boost extension for AutoFixture with AutoMoq</title>
         <authors>DCastro</authors>
         <owners>DCastro</owners>
@@ -12,6 +12,8 @@
 
 See the project's page for examples: https://github.com/dcastro/AutoMoq.Boost</description>
         <summary>AutoMoq.Boost automatically sets up mocks retrieved from AutoFixture's AutoMoq, making mocking of complex dependency graphs easier than ever.</summary>
+        <releaseNotes>- Added support for "out" parameters;
+- Fixed: no longer throws an exception when setting up types whose methods have "ref" parameters.</releaseNotes>
         <copyright>© 2014 Diogo Castro</copyright>
         <tags>autofixture automoq moq mocking</tags>
         <dependencies>
