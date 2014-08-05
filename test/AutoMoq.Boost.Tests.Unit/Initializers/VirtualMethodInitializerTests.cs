@@ -86,6 +86,19 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
         }
 
         [Theory, AutoData]
+        public void SetsUp_Indexers(Fixture fixture,
+                                    [Frozen] int frozenInt, VirtualMethodInitializer initializer,
+                                    Mock<IInterfaceWithIndexer> mock)
+        {
+            //act
+            initializer.Setup(mock, new SpecimenContext(fixture));
+            int result = mock.Object[3];
+
+            //assert
+            Assert.Equal(frozenInt, result);
+        }
+
+        [Theory, AutoData]
         public void IgnoresMethodsWithRefParameters(Fixture fixture,
                                                     [Frozen] string frozenString, VirtualMethodInitializer initializer,
                                                     Mock<IInterfaceWithRefParameter> mock)
@@ -181,6 +194,11 @@ namespace Dash.AutoMoq.Boost.Tests.Unit
         public interface IInterfaceWithOutParameter
         {
             void Method(out int i);
+        }
+
+        public interface IInterfaceWithIndexer
+        {
+            int this[int index] { get; }
         }
     }
 }
