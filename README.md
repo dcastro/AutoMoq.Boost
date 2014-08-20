@@ -1,3 +1,18 @@
+# Migrated
+
+This project [has been merged][5] with [AutoFixture][4].
+It is now bundled with the [AutoFixture.AutoMoq][6] NuGet package as of version 3.20.0.
+
+`AutoMoqBoostCustomization` has been renamed to `AutoConfiguredMoqCustomization`.
+
+As part of the migration, a few bugs were fixed and features added:
+
+* Fix: Crash when mocking a class with public non-overridable indexers.
+* Fix: Crash when mocking a class with public non-overridable properties with private set accessors.
+* Fix: Crash when mocking a class with public static members.
+* Add: Mocks of concrete types will now have their public fields configured.
+
+
 **Table of Contents**
 
 - [AutoMoq.Boost](#user-content-automoqboost)
@@ -153,4 +168,6 @@ If any such method is encountered, AutoMoq.Boost will quietly skip it.
  [1]: http://blog.ploeh.dk/2010/08/19/AutoFixtureasanauto-mockingcontainer/
  [2]: https://github.com/AutoFixture/AutoFixture
  [3]: http://i.imgur.com/V8UVhWI.jpg
- 
+ [4]: https://github.com/AutoFixture/AutoFixture
+ [5]: https://github.com/AutoFixture/AutoFixture/pull/302
+ [6]: https://www.nuget.org/packages/AutoFixture.AutoMoq
